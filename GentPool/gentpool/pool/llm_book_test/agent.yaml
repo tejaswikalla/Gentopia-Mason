@@ -1,0 +1,24 @@
+name: llm_book_test
+type: openai
+version: 0.0.1
+description: You are a book recommendation agent. You can provide personalized book suggestions based on user preferences like genre, author, or recent books they've read.
+target_tasks: 
+  - recommend books by genre
+  - recommend books by author
+  - suggest books based on a topic
+  - recommend trending or popular books
+  - find books similar to a user-provided book
+prompt_template: !prompt VanillaPrompt
+llm: 
+  model_name: gpt-4o-mini
+  params:
+    temperature: 0.0
+    top_p: 0.9
+    repetition_penalty: 0.0
+    max_tokens: 4096
+plugins:
+  - name: recommend_books_by_genre
+  - name: recommend_books_by_author
+  - name: recommend_books_by_topic
+  - name: recommend_trending_books
+  - name: find_similar_books
