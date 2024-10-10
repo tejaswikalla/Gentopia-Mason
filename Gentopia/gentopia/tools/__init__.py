@@ -14,6 +14,10 @@ from .code_interpreter import PythonCodeInterpreter
 from .file_operation import WriteFile, ReadFile
 from .duckduckgo import DuckDuckGo
 
+from .books import *
+from .pdf_reader import *
+
+
 
 def load_tools(name: str) -> BaseTool:
     name2tool = {
@@ -43,6 +47,12 @@ def load_tools(name: str) -> BaseTool:
         "search_single_paper": SearchSinglePaper,
         "search_related_paper": SearchRelatedPaper,
         "search_cite_paper": SearchCitePaper,
+        "pdf_reader":PDFReader,
+        "recommend_books_by_genre":RecommendBooksByGenre,
+        "recommend_books_by_author":RecommendBooksByAuthor,
+        "recommend_books_by_topic":RecommendBooksByTopic,
+        "recommend_trending_books":RecommendTrendingBooks,
+        "find_similar_books":RecommendSimilarBooks,
     }
     if name not in name2tool:
         raise NotImplementedError
