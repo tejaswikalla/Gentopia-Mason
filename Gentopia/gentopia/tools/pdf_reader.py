@@ -20,17 +20,15 @@ class PDFReader(BaseTool):
         response = requests.get(url, stream=True)
         print(f"Fetching PDF from {url}")
         
-        # Raise an exception if the request failed
         if response.status_code != 200:
             raise Exception(f"Failed to retrieve PDF: Status code {response.status_code}")
 
         # Use BytesIO to handle the PDF in memory
         pdf_stream = BytesIO(response.content)
 
-        # Return the stream for further processing
         return pdf_stream
 
-    # Modify the agent's PDF reading function to handle URLs
+    # PDF reading function
     def extract_text_from_pdf(self, pdf_stream):
         try:
             # Create a PDF reader object from the stream
@@ -49,13 +47,11 @@ class PDFReader(BaseTool):
             pdf_stream = self.read_pdf_from_url(file_path)
             return self.extract_text_from_pdf(pdf_stream)
         else:
-            # If it's a local file, open it and read
             print(f"Reading local PDF file: {file_path}")
             with open(file_path, 'rb') as file:
                 return self.extract_text_from_pdf(file)
 
     async def _arun(self, file_path: AnyStr) -> str:
-        # Simulating an asynchronous operation
         return await asyncio.to_thread(self._run, file_path)
 
 
